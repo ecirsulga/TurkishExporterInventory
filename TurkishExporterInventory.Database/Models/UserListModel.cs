@@ -8,16 +8,16 @@ namespace TurkishExporterInventory.Database.Models
 {
     public class UserListModel
     {
-        public int UserId { get; set; }
-        public string UserName { get; set; }
-        public string UserSurname { get; set; }
-        public string UserDepartment { get; set; }
-        public string UserPosition { get; set; }
-        public int UserItemCount { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Department { get; set; }
+        public string Position { get; set; }
+        public int ItemCount { get; set; }
 
         [Column(TypeName = "decimal(18,4)")]
-        public Nullable<decimal> UserTotalValue { get; set; }
-        public int UserLastItem { get; set; }
-        public DateTime UserRecordCreateTime { get; set; }
+        public Nullable<decimal> TotalValue { get; set; }
+        public string LastItem { get; set; }
+        public DateTime RecordCreateTime { get; set; }
     }
 }

@@ -11,6 +11,21 @@
 }
 
 .card-title {
-    font-size: 20px;
+    font-size: 1.5rem !important;
     text-align: center;
 }
+.default-buttons{
+    width: 33%;
+}
+.item-count-td {
+    text-align:center;
+}
+.item-count-th {
+    width:25px;
+}
+
+.userlist-form-th {
+    text-align: center;
+    font-size: 1rem !important;
+}
+

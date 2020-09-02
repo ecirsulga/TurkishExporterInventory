@@ -13,9 +13,9 @@ namespace TurkishExporterInventory.Database.Models
 
         public DateTime ItemGivenTime { get; set; }
 
-        public int rlt_Person_Id { get; set; }
+        public int rlt_User_Id { get; set; }
 
-        [ForeignKey("rlt_Person_Id")]
+        [ForeignKey("rlt_User_Id")]
         public virtual User User { get; set; }
 
         public int rlt_Item_Id { get; set; }

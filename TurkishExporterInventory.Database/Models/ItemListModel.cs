@@ -9,25 +9,25 @@ namespace TurkishExporterInventory.Database.Models
 {
     public class ItemListModel
     {
-        public int ItemId { get; set; }
+        public int Id { get; set; }
 
-        public string ItemName { get; set; }
+        public string Name { get; set; }
 
         [Column(TypeName = "decimal(18,4)")]
 
-        public Nullable<decimal> ItemPrice { get; set; }
+        public Nullable<decimal> Price { get; set; }
 
-        public string ItemPurpose { get; set; }
+        public string Purpose { get; set; }
 
-        public String ItemOwnerNameSurname { get; set; }
+        public string LastUser { get; set; }
 
         public int ItemOwnersCount { get; set; }
 
-        public DateTime ItemBoughtDate { get; set; }
+        public DateTime BoughtDate { get; set; }
 
-        public string ItemBoughtPlace { get; set; }
+        public string BoughtPlace { get; set; }
 
-        public DateTime ItemRecordCreateTime { get; set; }
+        public DateTime RecordCreateTime { get; set; }
     }
 
     

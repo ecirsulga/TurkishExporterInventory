@@ -1,0 +1,67 @@
+﻿@model IEnumerable<TurkishExporterInventory.Database.Models.UserListModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link href="~/css/UserForms/Userlist.css" rel="stylesheet" />
+
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tüm Kullanıcılar</h4>
+
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="userlist-form-th font-weight-bolder"> Kullanıcı </th>
+                            <th class="userlist-form-th font-weight-bolder"> İsim </th>
+                            <th class="userlist-form-th font-weight-bolder"> Departman</th>
+                            <th class="userlist-form-th font-weight-bolder"> Pozisyon</th>
+                            <th class="userlist-form-th font-weight-bolder"> İlerleme </th>
+                            <th class="item-count-th userlist-form-th font-weight-bolder"> Toplam Ürün</th>
+                            <th class="userlist-form-th font-weight-bolder"> Miktar </th>
+                            <th class="userlist-form-th font-weight-bolder"> Son Ürün </th>
+                            <th class="userlist-form-th font-weight-bolder"> Oluşturma Tarihi </th>
+                            <th class="userlist-form-th font-weight-bolder"> Özellikler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                        <tr>
+                            <td class="py-1">
+                                <img src="../../../assets/images/faces-clipart/pic-1.png" alt="image">
+                            </td>
+                            <td>@Html.DisplayFor(modeluser => user.Name) @Html.DisplayFor(modeluser => user.Surname)</td>
+                            <td>@Html.DisplayFor(modeluser => user.Department)</td>
+                            <td>@Html.DisplayFor(modeluser => user.Position)</td>
+                            <td>
+
+                                <div class="progress">
+                                    <div class="progress-bar bg-success style1" style="width:@(user.ItemCount*25+"%")" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </td>
+                            <td class="item-count-td"><button type="button" class="btn btn-outline-danger btn-rounded">@Html.DisplayFor(modeluser => user.ItemCount)</button></td>
+                            <td class="text-primary">@Html.DisplayFor(modeluser => user.TotalValue)</td>
+                            <td>@Html.DisplayFor(modeluser => user.LastItem)</td>
+                            <td>@Html.DisplayFor(modeluser => user.RecordCreateTime)</td>
+
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-warning btn-xs default-buttons">Düzenle</a>
+                                <a asp-action="Details" asp-route-id="@user.Id" class="btn btn-primary btn-xs default-buttons">Detaylar</a>
+                                <a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger btn-xs default-buttons">Sil</a>
+                            </td>
+                        </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
