@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewData["Title"] = "ItemAdd";
+}
+
+<link href="~/css/UserForms/AddForms.css" rel="stylesheet" />
+
+<div class="container-fluid">
+
+    <div class="row mx-auto main-row">
+        <div id="user-create-update-page" class="col-12">
+            <div class="card border-dark">
+                <div class="card-header bg-primary">
+                    <h4 class="m-b-0 text-white form-title">Eşya Bilgileri</h4>
+                </div>
+                <div class="card-body p-5">
+                    <form class="m-t-40" id="user-form">
+                        <div class="d-flex">
+                            <div class="col">
+
+                                <div class="card border p-3">
+                                    <div class="form-group">
+                                        <h5>Eşya Adı <span class="text-danger">*</span></h5>
+                                        <input type="hidden" id="ItemNameId" name="ItemNameId" class="form-control">
+                                        <div class="controls">
+                                            @*<input type="text" id="Name" name="minChar" class="form-control" placeholder="Ad Soyad" minlength="4" required data-validation-required-message="Bir değer giriniz">*@
+                                            <input type="text" placeholder="Eşya Adı" name="Name" class="form-control">
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>Eşya Alım Yeri <span class="text-danger">*</span></h5>
+                                        <input type="hidden" id="itemBoughtPlace" name="itemBoughtPlace" class="form-control">
+                                        <div class="controls">
+                                            @*<input type="text" id="Surname" name="minChar" class="form-control" placeholder="Ad Soyad" minlength="4" required data-validation-required-message="Bir değer giriniz">*@
+                                            <input type="text" placeholder="Eşya Alım Yeri" name="BoughtPlace" class="form-control">
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <h5>Eşya Fiyatı <span class="text-danger">*</span></h5>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">₺</span>
+                                            </div>
+                                            <input type="text" class="form-control" aria-label="Ortalama TL Ücreti">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">.00</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
+
+
+                                        <div class="md-form">
+                                            <div class="file-field">
+                                                <div class="mb-4">
+                                                    <img src="https://www.ispartakulegayrimenkul.com/uploads/thumb/default_ilan_resim.jpg"
+                                                         class="rounded-circle z-depth-1-half avatar-pic w-75" alt="example placeholder avatar">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <input type="file">
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <button type="button" class="ladda-button btn waves-effect waves-light save btn-success mt-4" data-target-operation="disable" data-size="xs" data-color="info"><i class="fa fa-floppy-o"></i> Ekle</button>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
