@@ -21,7 +21,7 @@
 
                                 <div class="card border p-3">
                                     <div class="form-group">
-                                        <label asp-for="Name" class="control-label add-form-titles">Isim</label>
+                                        <label asp-for="Name" class="control-label add-form-titles">Eşya Adı</label>
                                         <input asp-for="Name" class="form-control" />
                                         <span asp-validation-for="Name" class="text-danger"></span>
                                     </div>
@@ -36,7 +36,7 @@
                                         <span asp-validation-for="BuyingDate" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
-                                        <label asp-for="rlt_Supplier_Id" class="control-label"></label>
+                                        <label asp-for="rlt_Supplier_Id" class="control-label">Tedarikçi</label>
                                         <select asp-for="rlt_Supplier_Id" class="form-control" asp-items="ViewBag.rlt_Supplier_Id"></select>
                                     </div>
                                     <div class="form-group">

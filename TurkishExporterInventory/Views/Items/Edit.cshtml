@@ -14,27 +14,27 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="control-label">Eşya Adı</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PriceTL" class="control-label"></label>
+                <label asp-for="PriceTL" class="control-label">Fiyat</label>
                 <input asp-for="PriceTL" class="form-control" />
                 <span asp-validation-for="PriceTL" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Purpose" class="control-label"></label>
+                <label asp-for="Purpose" class="control-label">Alım Amacı</label>
                 <input asp-for="Purpose" class="form-control" />
                 <span asp-validation-for="Purpose" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BuyingDate" class="control-label"></label>
+                <label asp-for="BuyingDate" class="control-label">Alım Tarihi</label>
                 <input asp-for="BuyingDate" class="form-control" />
                 <span asp-validation-for="BuyingDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="rlt_Supplier_Id" class="control-label"></label>
+                <label asp-for="rlt_Supplier_Id" class="control-label">Tedarikçi</label>
                 <select asp-for="rlt_Supplier_Id" class="form-control" asp-items="ViewBag.rlt_Supplier_Id"></select>
                 <span asp-validation-for="rlt_Supplier_Id" class="text-danger"></span>
             </div>

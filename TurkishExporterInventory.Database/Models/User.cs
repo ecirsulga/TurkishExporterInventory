@@ -32,8 +32,6 @@ namespace TurkishExporterInventory.Database.Models
         [MaxLength(10)]
         public string Phone { get; set; }
 
-        public string UserName { get; set; }
-
         [AllowNull]
         [MaxLength(30)]
         public string Email {get;set;}

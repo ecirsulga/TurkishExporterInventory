@@ -72,7 +72,7 @@ namespace TurkishExporterInventory.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddUser([Bind("Name,Surname,rlt_Department_Id,Position,Password,Phone,UserName,Email,Id")] User user)
+        public async Task<IActionResult> AddUser([Bind("Name,Surname,rlt_Department_Id,Position,Password,Phone,Email,Id")] User user)
         {
             user.RecordCreateTime = DateTime.Now;
             if (ModelState.IsValid)
@@ -107,7 +107,7 @@ namespace TurkishExporterInventory.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,Surname,rlt_Department_Id,Position,Password,Phone,UserName,Email,Id")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Name,Surname,rlt_Department_Id,Position,Password,Phone,Email,Id")] User user)
         {
             user.RecordCreateTime = DateTime.Now;
             if (id != user.Id)
