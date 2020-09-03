@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using TurkishExporterInventory.Database.Models.Inheritance;
 
@@ -15,14 +16,27 @@ namespace TurkishExporterInventory.Database.Models
         [MaxLength(50)]
         public string Surname { get; set; }
 
-        [MaxLength(50)]
-        public string Department { get; set; }
+        public int rlt_Department_Id { get; set; }
 
+        [ForeignKey("rlt_Department_Id")]
+        public Department Department { get; set; }
+
+        [AllowNull]
         [MaxLength(50)]
         public string Position { get; set; }
 
-        //[ForeignKey("rlt_Department_Id")]
-        //public virtual User Department { get; set; }
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        [AllowNull]
+        [MaxLength(10)]
+        public string Phone { get; set; }
+
+        public string UserName { get; set; }
+
+        [AllowNull]
+        [MaxLength(30)]
+        public string Email {get;set;}
 
         public virtual ICollection<Allocation> Allocations { get; set; }
 

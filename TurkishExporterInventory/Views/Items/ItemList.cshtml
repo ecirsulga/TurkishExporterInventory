@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<TurkishExporterInventory.Database.Models.ItemListModel>
+﻿@model IEnumerable<TurkishExporterInventory.Database.Models.ItemListModel>
 
 
 @{
@@ -13,16 +12,18 @@
 
         <div class="card-body">
             <h4 class="card-title">Tüm Eşyalar</h4>
-            
+
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th class="userlist-form-th font-weight-bolder"> Index </th>
                         <th class="userlist-form-th font-weight-bolder"> Ürün Adı </th>
                         <th class="userlist-form-th font-weight-bolder"> Ürün Alım Yeri </th>
+                        <th class="userlist-form-th font-weight-bolder"> Ürün Alım Amacı </th>
                         <th class="userlist-form-th font-weight-bolder"> Tahsis Sayısı </th>
                         <th class="userlist-form-th font-weight-bolder"> Ürün Fiyatı </th>
                         <th class="userlist-form-th font-weight-bolder"> Ürün Alım Tarihi </th>
+                        <th class="userlist-form-th font-weight-bolder"> Özellikler </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,9 +36,15 @@
                                 <td> @i </td>
                                 <td> @Html.DisplayFor(modelItem => item.Name) </td>
                                 <td> @Html.DisplayFor(modelItem => item.BoughtPlace) </td>
+                                <td> @item.Purpose </td>
                                 <td> @Html.DisplayFor(modelItem => item.ItemOwnersCount) </td>
                                 <td> ₺@Html.DisplayFor(modelItem => item.Price) </td>
                                 <td> @item.BoughtDate.Date.ToString("MM/dd/yyyy")</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Düzenle</a>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Detaylar</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Sil</a>
+                                </td>
                             </tr>
                         }
                         else if (i == 2)
@@ -46,9 +53,15 @@
                                 <td> @i </td>
                                 <td> @Html.DisplayFor(modelItem => item.Name) </td>
                                 <td> @Html.DisplayFor(modelItem => item.BoughtPlace) </td>
+                                <td> @item.Purpose </td>
                                 <td> @Html.DisplayFor(modelItem => item.ItemOwnersCount) </td>
                                 <td> ₺@Html.DisplayFor(modelItem => item.Price) </td>
                                 <td> @item.BoughtDate.Date.ToString("MM/dd/yyyy")</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Düzenle</a>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Detaylar</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Sil</a>
+                                </td>
                             </tr>
                         }
                         else if (i == 3)
@@ -57,9 +70,15 @@
                                 <td> @i </td>
                                 <td> @Html.DisplayFor(modelItem => item.Name) </td>
                                 <td> @Html.DisplayFor(modelItem => item.BoughtPlace) </td>
+                                <td> @item.Purpose </td>
                                 <td> @Html.DisplayFor(modelItem => item.ItemOwnersCount) </td>
                                 <td> ₺@Html.DisplayFor(modelItem => item.Price) </td>
                                 <td> @item.BoughtDate.Date.ToString("MM/dd/yyyy")</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Düzenle</a>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Detaylar</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Sil</a>
+                                </td>
                             </tr>
                         }
                         else if (i == 4)
@@ -68,9 +87,15 @@
                                 <td> @i </td>
                                 <td> @Html.DisplayFor(modelItem => item.Name) </td>
                                 <td> @Html.DisplayFor(modelItem => item.BoughtPlace) </td>
+                                <td> @item.Purpose </td>
                                 <td> @Html.DisplayFor(modelItem => item.ItemOwnersCount) </td>
                                 <td> ₺@Html.DisplayFor(modelItem => item.Price) </td>
                                 <td> @item.BoughtDate.Date.ToString("MM/dd/yyyy")</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Düzenle</a>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Detaylar</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Sil</a>
+                                </td>
                             </tr>
                         }
                         else if (i == 5)
@@ -79,9 +104,15 @@
                                 <td> @i </td>
                                 <td> @Html.DisplayFor(modelItem => item.Name) </td>
                                 <td> @Html.DisplayFor(modelItem => item.BoughtPlace) </td>
+                                <td> @item.Purpose </td>
                                 <td> @Html.DisplayFor(modelItem => item.ItemOwnersCount) </td>
                                 <td> ₺@Html.DisplayFor(modelItem => item.Price) </td>
                                 <td> @item.BoughtDate.Date.ToString("MM/dd/yyyy")</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Düzenle</a>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Detaylar</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Sil</a>
+                                </td>
                             </tr>
                         }
 

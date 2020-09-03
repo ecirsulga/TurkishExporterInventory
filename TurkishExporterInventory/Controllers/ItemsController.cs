@@ -35,11 +35,11 @@ namespace TurkishExporterInventory.Controllers
                     Price = q.PriceTL,
                     Purpose = q.Purpose,
                     BoughtDate = q.BuyingDate,
-                    BoughtPlace = q.BoughtPlace,
-                    LastUser = q.Allocations.Where(w => w.rlt_Item_Id == q.Id).OrderByDescending(o => o.RecordCreateTime).Select(s => s.User.Name+" "+s.User.Surname).FirstOrDefault() ?? "Tahsis Yok",
+                    BoughtPlace = q.Supplier.Name,
+                    LastUser = q.Allocations.Where(w => w.rlt_Item_Id == q.Id).OrderByDescending(o => o.RecordCreateTime).Select(s => s.User.Name + " " + s.User.Surname).FirstOrDefault() ?? "Tahsis Yok",
                     ItemOwnersCount = q.Allocations.Count,
                     RecordCreateTime = q.RecordCreateTime
-                });
+                }) ;
 
 
 
@@ -64,18 +64,19 @@ namespace TurkishExporterInventory.Controllers
             return View(item);
         }
 
-        // GET: Items/Create
+        // GET: Itemstry/Create
         public IActionResult AddItem()
         {
+            ViewData["rlt_Supplier_Id"] = new SelectList(_context.Suppliers, "Id", "Name");
             return View();
         }
 
-        // POST: Items/Create
+        // POST: Itemstry/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddItem([Bind("Name,PriceTL,BoughtPlace,Purpose,BuyingDate,Id")] Item item)
+        public async Task<IActionResult> AddItem([Bind("Name,PriceTL,Purpose,BuyingDate,rlt_Supplier_Id,Id")] Item item)
         {
             item.RecordCreateTime = DateTime.Now;
             if (ModelState.IsValid)
@@ -84,10 +85,11 @@ namespace TurkishExporterInventory.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(ItemList));
             }
+            ViewData["rlt_Supplier_Id"] = new SelectList(_context.Suppliers, "Id", "Id", item.rlt_Supplier_Id);
             return View(item);
         }
 
-        // GET: Items/Edit/5
+        // GET: Itemstry/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -100,16 +102,18 @@ namespace TurkishExporterInventory.Controllers
             {
                 return NotFound();
             }
+            ViewData["rlt_Supplier_Id"] = new SelectList(_context.Suppliers, "Id", "Name", item.rlt_Supplier_Id);
             return View(item);
         }
 
-        // POST: Items/Edit/5
+        // POST: Itemstry/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,PriceTL,BoughtPlace,Purpose,BuyingDate,Id,RecordCreateTime")] Item item)
+        public async Task<IActionResult> Edit(int id, [Bind("Name,PriceTL,Purpose,BuyingDate,rlt_Supplier_Id,Id")] Item item)
         {
+            item.RecordCreateTime = DateTime.Now;
             if (id != item.Id)
             {
                 return NotFound();
@@ -133,12 +137,13 @@ namespace TurkishExporterInventory.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ItemList));
             }
+            ViewData["rlt_Supplier_Id"] = new SelectList(_context.Suppliers, "Id", "Id", item.rlt_Supplier_Id);
             return View(item);
         }
 
-        // GET: Items/Delete/5
+        // GET: Itemstry/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -147,6 +152,7 @@ namespace TurkishExporterInventory.Controllers
             }
 
             var item = await _context.Items
+                .Include(i => i.Supplier)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (item == null)
             {
@@ -156,7 +162,7 @@ namespace TurkishExporterInventory.Controllers
             return View(item);
         }
 
-        // POST: Items/Delete/5
+        // POST: Itemstry/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -164,7 +170,7 @@ namespace TurkishExporterInventory.Controllers
             var item = await _context.Items.FindAsync(id);
             _context.Items.Remove(item);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ItemList));
         }
 
         private bool ItemExists(int id)

@@ -33,7 +33,7 @@
     <link href="~/assets/css/shared/style.css" rel="stylesheet" />
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../../assets/css/demo_1/style.css">
+    <link rel="stylesheet" href="~/assets/css/demo_1/style.css">
     <!-- End Layout styles -->
 
 
@@ -44,10 +44,10 @@
         <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
                 <a class="navbar-brand brand-logo" href="../../index.html">
-                    <img src="../../../assets/images/logo.svg" alt="logo" />
+                    <img src="~/assets/images/logo.svg" alt="logo" />
                 </a>
                 <a class="navbar-brand brand-logo-mini" href="../../index.html">
-                    <img src="../../../assets/images/logo-mini.svg" alt="logo" />
+                    <img src="~/assets/images/logo-mini.svg" alt="logo" />
                 </a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center">
@@ -105,7 +105,7 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
-                                    <img src="../../../assets/images/faces/face10.jpg" alt="image" class="img-sm profile-pic">
+                                    <img src="~/assets/images/faces/face10.jpg" alt="image" class="img-sm profile-pic">
                                 </div>
                                 <div class="preview-item-content flex-grow py-2">
                                     <p class="preview-subject ellipsis font-weight-medium text-dark">Marian Garner </p>
@@ -114,7 +114,7 @@
                             </a>
                             <a class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
-                                    <img src="../../../assets/images/faces/face12.jpg" alt="image" class="img-sm profile-pic">
+                                    <img src="~/assets/images/faces/face12.jpg" alt="image" class="img-sm profile-pic">
                                 </div>
                                 <div class="preview-item-content flex-grow py-2">
                                     <p class="preview-subject ellipsis font-weight-medium text-dark">David Grey </p>
@@ -123,7 +123,7 @@
                             </a>
                             <a class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
-                                    <img src="../../../assets/images/faces/face1.jpg" alt="image" class="img-sm profile-pic">
+                                    <img src="~/assets/images/faces/face1.jpg" alt="image" class="img-sm profile-pic">
                                 </div>
                                 <div class="preview-item-content flex-grow py-2">
                                     <p class="preview-subject ellipsis font-weight-medium text-dark">Travis Jenkins </p>
@@ -173,11 +173,11 @@
                     </li>
                     <li class="nav-item dropdown d-none d-xl-inline-block user-dropdown">
                         <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                            <img class="img-xs rounded-circle" src="../../../assets/images/faces/face8.jpg" alt="Profile image">
+                            <img class="img-xs rounded-circle" src="~/assets/images/faces/face8.jpg" alt="Profile image">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                             <div class="dropdown-header text-center">
-                                <img class="img-md rounded-circle" src="../../../assets/images/faces/face8.jpg" alt="Profile image">
+                                <img class="img-md rounded-circle" src="~/assets/images/faces/face8.jpg" alt="Profile image">
                                 <p class="mb-1 mt-3 font-weight-semibold">Allen Moreno</p>
                                 <p class="font-weight-light text-muted mb-0">allenmoreno@gmail.com</p>
                             </div>
@@ -202,7 +202,7 @@
                     <li class="nav-item nav-profile">
                         <a href="#" class="nav-link">
                             <div class="profile-image">
-                                <img class="img-xs rounded-circle" src="../../../assets/images/faces/face8.jpg" alt="profile image">
+                                <img class="img-xs rounded-circle" src="~/assets/images/faces/face8.jpg" alt="profile image">
                                 <div class="dot-indicator bg-success"></div>
                             </div>
                             <div class="text-wrapper">
@@ -222,10 +222,28 @@
                         <div class="collapse" id="departments-dropdown">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="../../pages/ui-features/buttons.html">Departman Ekleme</a>
+                                    <a class="nav-link" href="../Departments/Create">Departman Ekleme</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="../../pages/ui-features/dropdowns.html">Departman Listesi</a>
+                                    <a class="nav-link" href="../Departments/Index">Departman Listesi</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#navbar-suppliers-dropdown" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="menu-icon typcn typcn-coffee"></i>
+                            <span class="menu-title">Tedarikçiler</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="navbar-suppliers-dropdown">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../Suppliers/Create">Tedarikçi Ekleme</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../Suppliers/Index">Tedarikçi Listesi</a>
                                 </li>
 
                             </ul>
@@ -276,7 +294,7 @@
                             <span class="menu-title">Ayarlar</span>
                         </a>
                     </li>
-                    
+
                 </ul>
             </nav>
             <!-- partial -->

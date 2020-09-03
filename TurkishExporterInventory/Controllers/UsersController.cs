@@ -28,7 +28,7 @@ namespace TurkishExporterInventory.Controllers
                 Id = q.Id,
                 Name = q.Name,
                 Surname = q.Surname,
-                Department = q.Department,
+                Department = q.Department.Name,
                 ItemCount = q.Allocations.Count,
                 Position = q.Position,
                 RecordCreateTime = q.RecordCreateTime,
@@ -50,6 +50,7 @@ namespace TurkishExporterInventory.Controllers
             }
 
             var user = await _context.Users
+                .Include(u => u.Department)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
@@ -62,6 +63,7 @@ namespace TurkishExporterInventory.Controllers
         // GET: Users/Create
         public IActionResult AddUser()
         {
+            ViewData["rlt_Department_Id"] = new SelectList(_context.Departments, "Id", "Name");
             return View();
         }
 
@@ -70,7 +72,7 @@ namespace TurkishExporterInventory.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddUser([Bind("Name,Surname,Department,Position,Id")] User user)
+        public async Task<IActionResult> AddUser([Bind("Name,Surname,rlt_Department_Id,Position,Password,Phone,UserName,Email,Id")] User user)
         {
             user.RecordCreateTime = DateTime.Now;
             if (ModelState.IsValid)
@@ -79,6 +81,7 @@ namespace TurkishExporterInventory.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(UserList));
             }
+            ViewData["rlt_Department_Id"] = new SelectList(_context.Departments, "Id", "Id", user.rlt_Department_Id);
             return View(user);
         }
 
@@ -95,6 +98,7 @@ namespace TurkishExporterInventory.Controllers
             {
                 return NotFound();
             }
+            ViewData["rlt_Department_Id"] = new SelectList(_context.Departments, "Id", "Name", user.rlt_Department_Id);
             return View(user);
         }
 
@@ -103,8 +107,9 @@ namespace TurkishExporterInventory.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,Surname,Department,Position,Id,RecordCreateTime")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Name,Surname,rlt_Department_Id,Position,Password,Phone,UserName,Email,Id")] User user)
         {
+            user.RecordCreateTime = DateTime.Now;
             if (id != user.Id)
             {
                 return NotFound();
@@ -130,10 +135,11 @@ namespace TurkishExporterInventory.Controllers
                 }
                 return RedirectToAction(nameof(UserList));
             }
+            ViewData["rlt_Department_Id"] = new SelectList(_context.Departments, "Id", "Id", user.rlt_Department_Id);
             return View(user);
         }
 
-        // GET: Users/Delete/5
+        // GET: Users1/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -142,6 +148,7 @@ namespace TurkishExporterInventory.Controllers
             }
 
             var user = await _context.Users
+                .Include(u => u.Department)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
@@ -151,7 +158,7 @@ namespace TurkishExporterInventory.Controllers
             return View(user);
         }
 
-        // POST: Users/Delete/5
+        // POST: Users1/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
