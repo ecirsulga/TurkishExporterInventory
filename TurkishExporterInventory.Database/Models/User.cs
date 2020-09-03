@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using TurkishExporterInventory.Database.Models.Inheritance;
 
@@ -19,6 +20,9 @@ namespace TurkishExporterInventory.Database.Models
 
         [MaxLength(50)]
         public string Position { get; set; }
+
+        //[ForeignKey("rlt_Department_Id")]
+        //public virtual User Department { get; set; }
 
         public virtual ICollection<Allocation> Allocations { get; set; }
 

@@ -6,39 +6,86 @@
     ViewData["Title"] = "Itemlist";
 }
 <link href="~/css/ItemForms/Itemlist.css" rel="stylesheet" />
-
+<link href="~/css/UserForms/Userlist.css" rel="stylesheet" />
 
 <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
 
         <div class="card-body">
-            <h4 class="card-title">Table with contextual classes</h4>
-            <p class="card-description"> Add class <code>.table-{color}</code> </p>
+            <h4 class="card-title">Tüm Eşyalar</h4>
+            
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th> # </th>
-                        <th> Ürün Adı </th>
-                        <th> Ürün Alım Yeri </th>
-                        <th> Tahsis Sayısı </th>
-                        <th> Ürün Fiyatı </th>
-                        <th> Ürün Alım Tarihi </th>
+                        <th class="userlist-form-th font-weight-bolder"> Index </th>
+                        <th class="userlist-form-th font-weight-bolder"> Ürün Adı </th>
+                        <th class="userlist-form-th font-weight-bolder"> Ürün Alım Yeri </th>
+                        <th class="userlist-form-th font-weight-bolder"> Tahsis Sayısı </th>
+                        <th class="userlist-form-th font-weight-bolder"> Ürün Fiyatı </th>
+                        <th class="userlist-form-th font-weight-bolder"> Ürün Alım Tarihi </th>
                     </tr>
                 </thead>
                 <tbody>
-
+                    @{ int i = 1;}
                     @foreach (var item in Model)
                     {
-                     
-                    <tr class="table-primary">
-                        <td> 1 </td>
-                        <td> @Html.DisplayFor(modelItem => item.Name) </td>
-                        <td> @Html.DisplayFor(modelItem => item.BoughtPlace) </td>
-                        <td> @Html.DisplayFor(modelItem => item.ItemOwnersCount) </td>
-                        <td> ₺@Html.DisplayFor(modelItem => item.Price) </td>
-                        <td> @Html.DisplayFor(modelItem => item.BoughtDate) </td>
-                    </tr>
-                    
+                        if (i == 1)
+                        {
+                            <tr class="table-info">
+                                <td> @i </td>
+                                <td> @Html.DisplayFor(modelItem => item.Name) </td>
+                                <td> @Html.DisplayFor(modelItem => item.BoughtPlace) </td>
+                                <td> @Html.DisplayFor(modelItem => item.ItemOwnersCount) </td>
+                                <td> ₺@Html.DisplayFor(modelItem => item.Price) </td>
+                                <td> @item.BoughtDate.Date.ToString("MM/dd/yyyy")</td>
+                            </tr>
+                        }
+                        else if (i == 2)
+                        {
+                            <tr class="table-warning">
+                                <td> @i </td>
+                                <td> @Html.DisplayFor(modelItem => item.Name) </td>
+                                <td> @Html.DisplayFor(modelItem => item.BoughtPlace) </td>
+                                <td> @Html.DisplayFor(modelItem => item.ItemOwnersCount) </td>
+                                <td> ₺@Html.DisplayFor(modelItem => item.Price) </td>
+                                <td> @item.BoughtDate.Date.ToString("MM/dd/yyyy")</td>
+                            </tr>
+                        }
+                        else if (i == 3)
+                        {
+                            <tr class="table-danger">
+                                <td> @i </td>
+                                <td> @Html.DisplayFor(modelItem => item.Name) </td>
+                                <td> @Html.DisplayFor(modelItem => item.BoughtPlace) </td>
+                                <td> @Html.DisplayFor(modelItem => item.ItemOwnersCount) </td>
+                                <td> ₺@Html.DisplayFor(modelItem => item.Price) </td>
+                                <td> @item.BoughtDate.Date.ToString("MM/dd/yyyy")</td>
+                            </tr>
+                        }
+                        else if (i == 4)
+                        {
+                            <tr class="table-success">
+                                <td> @i </td>
+                                <td> @Html.DisplayFor(modelItem => item.Name) </td>
+                                <td> @Html.DisplayFor(modelItem => item.BoughtPlace) </td>
+                                <td> @Html.DisplayFor(modelItem => item.ItemOwnersCount) </td>
+                                <td> ₺@Html.DisplayFor(modelItem => item.Price) </td>
+                                <td> @item.BoughtDate.Date.ToString("MM/dd/yyyy")</td>
+                            </tr>
+                        }
+                        else if (i == 5)
+                        {
+                            <tr class="table-primary">
+                                <td> @i </td>
+                                <td> @Html.DisplayFor(modelItem => item.Name) </td>
+                                <td> @Html.DisplayFor(modelItem => item.BoughtPlace) </td>
+                                <td> @Html.DisplayFor(modelItem => item.ItemOwnersCount) </td>
+                                <td> ₺@Html.DisplayFor(modelItem => item.Price) </td>
+                                <td> @item.BoughtDate.Date.ToString("MM/dd/yyyy")</td>
+                            </tr>
+                        }
+
+                        i++;
                     }
                 </tbody>
             </table>

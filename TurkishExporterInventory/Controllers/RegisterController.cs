@@ -12,5 +12,10 @@ namespace TurkishExporterInventory.Controllers
         {
             return View();
         }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
     }
 }

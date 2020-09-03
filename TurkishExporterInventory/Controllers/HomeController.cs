@@ -24,8 +24,6 @@ namespace TurkishExporterInventory.Controllers
 
         public IActionResult Index()
         {
-            var test = _entityDbContext.Users.Where(q => q.Id == 5).FirstOrDefault();
-
             return View();
         }
 

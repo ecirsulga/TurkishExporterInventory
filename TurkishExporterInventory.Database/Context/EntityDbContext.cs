@@ -20,6 +20,7 @@ namespace TurkishExporterInventory.Database.Context
         public virtual DbSet<Item> Items { get; set; } // Eşyaların/Ürünlerin tutulduğu Tablo
         public virtual DbSet<User> Users { get; set; } // Çalışanların tutulduğu tablo
         public virtual DbSet<Allocation> Allocations { get; set; } // Emanet vermelerin tutulduğu tablo
+        public virtual DbSet<Department> Departments { get; set; }
 
         #endregion
     }

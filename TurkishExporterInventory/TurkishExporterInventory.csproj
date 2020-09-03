@@ -34,8 +34,4 @@
     <ProjectReference Include="..\TurkishExporterInventory.Database\TurkishExporterInventory.Database.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Login\" />
-  </ItemGroup>
-
 </Project>

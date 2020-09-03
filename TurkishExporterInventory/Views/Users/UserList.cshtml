@@ -48,8 +48,7 @@
                             <td class="item-count-td"><button type="button" class="btn btn-outline-danger btn-rounded">@Html.DisplayFor(modeluser => user.ItemCount)</button></td>
                             <td class="text-primary">@Html.DisplayFor(modeluser => user.TotalValue)</td>
                             <td>@Html.DisplayFor(modeluser => user.LastItem)</td>
-                            <td>@Html.DisplayFor(modeluser => user.RecordCreateTime)</td>
-
+                            <td> @user.RecordCreateTime.Date.ToString("MM/dd/yyyy")</td>
                             <td>
                                 <a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-warning btn-xs default-buttons">Düzenle</a>
                                 <a asp-action="Details" asp-route-id="@user.Id" class="btn btn-primary btn-xs default-buttons">Detaylar</a>

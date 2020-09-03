@@ -341,3 +341,5 @@ C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debu
 C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Items\Details.cshtml.g.cs
 C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Items\Edit.cshtml.g.cs
 C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Items\ItemList.cshtml.g.cs
+C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Login\Login.cshtml.g.cs
+C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Register\Register.cshtml.g.cs
