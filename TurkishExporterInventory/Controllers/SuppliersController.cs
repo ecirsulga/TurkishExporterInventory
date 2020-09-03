@@ -54,8 +54,9 @@ namespace TurkishExporterInventory.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Phone,Email,Id,RecordCreateTime")] Supplier supplier)
+        public async Task<IActionResult> Create([Bind("Name,Phone,Email,Id")] Supplier supplier)
         {
+            supplier.RecordCreateTime = DateTime.Now;
             if (ModelState.IsValid)
             {
                 _context.Add(supplier);
@@ -86,8 +87,9 @@ namespace TurkishExporterInventory.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,Phone,Email,Id,RecordCreateTime")] Supplier supplier)
+        public async Task<IActionResult> Edit(int id, [Bind("Name,Phone,Email,Id")] Supplier supplier)
         {
+            supplier.RecordCreateTime = DateTime.Now;
             if (id != supplier.Id)
             {
                 return NotFound();
