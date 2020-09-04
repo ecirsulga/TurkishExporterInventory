@@ -33,8 +33,9 @@ namespace TurkishExporterInventory.Controllers
                 Position = q.Position,
                 RecordCreateTime = q.RecordCreateTime,
                 TotalValue = q.Allocations.Where(w => w.rlt_User_Id == q.Id).OrderByDescending(o => o.RecordCreateTime).Select(s => s.Item.PriceTL).Sum() ?? 0,
-                LastItem = q.Allocations.Where(w => w.rlt_User_Id == q.Id).OrderByDescending(o => o.RecordCreateTime).Select(s => s.Item.Name).FirstOrDefault() ?? "Tahsis Yok"
-            });
+                LastItem = q.Allocations.Where(w => w.rlt_User_Id == q.Id).OrderByDescending(o => o.RecordCreateTime).Select(s => s.Item.Name).FirstOrDefault() ?? "Tahsis Yok",
+                Items = q.Allocations.Where(w => w.rlt_User_Id == q.Id).OrderByDescending(o => o.RecordCreateTime).Select(s => s.Item).ToList()
+            }); ;
 
             return View(users.ToList());
         }

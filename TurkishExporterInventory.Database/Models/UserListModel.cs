@@ -15,6 +15,8 @@ namespace TurkishExporterInventory.Database.Models
         public string Position { get; set; }
         public int ItemCount { get; set; }
 
+        public List<Item> Items { get; set; }
+
         [Column(TypeName = "decimal(18,4)")]
         public Nullable<decimal> TotalValue { get; set; }
         public string LastItem { get; set; }

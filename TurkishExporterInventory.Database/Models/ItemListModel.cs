@@ -13,9 +13,7 @@ namespace TurkishExporterInventory.Database.Models
 
         public string Name { get; set; }
 
-        [Column(TypeName = "decimal(18,4)")]
-
-        public Nullable<decimal> Price { get; set; }
+        public decimal? PriceTL { get; set; }
 
         public string Purpose { get; set; }
 
@@ -28,6 +26,16 @@ namespace TurkishExporterInventory.Database.Models
         public string BoughtPlace { get; set; }
 
         public DateTime RecordCreateTime { get; set; }
+
+
+        public int rlt_Item_Id { get; set; }
+
+ 
+        public int rlt_User_Id { get; set; }
+
+        public DateTime BuyingDate { get; set; }
+
+        public int rlt_Supplier_Id { get; set; }
     }
 
     

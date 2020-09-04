@@ -338,10 +338,6 @@ C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debu
 C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Items\Details.cshtml.g.cs
 C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Items\Edit.cshtml.g.cs
 C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Items\ItemList.cshtml.g.cs
-C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Login\Login.cshtml.g.cs
-C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Register\Register.cshtml.g.cs
-C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\TurkishExporterInventory.csproj.CoreCompileInputs.cache
-C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\TurkishExporterInventory.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Departments\Create.cshtml.g.cs
 C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Departments\Delete.cshtml.g.cs
 C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Departments\Details.cshtml.g.cs
@@ -352,3 +348,12 @@ C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debu
 C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Suppliers\Details.cshtml.g.cs
 C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Suppliers\Edit.cshtml.g.cs
 C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Suppliers\Index.cshtml.g.cs
+C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Allocations\Create.cshtml.g.cs
+C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Allocations\Delete.cshtml.g.cs
+C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Allocations\Details.cshtml.g.cs
+C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Allocations\Edit.cshtml.g.cs
+C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Allocations\Index.cshtml.g.cs
+C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\TurkishExporterInventory.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\TurkishExporterInventory.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Home\Register.cshtml.g.cs
+C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Login\Login.cshtml.g.cs

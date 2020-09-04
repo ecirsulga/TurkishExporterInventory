@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TurkishExporterInventory.Database.Models.UserListModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "UserList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -33,7 +33,7 @@
                         @foreach (var user in Model)
                         {
                         <tr>
-                            <td class="py-1">
+                            <td class="py-1" style="text-align:center;">
                                 <img src="../../../assets/images/faces-clipart/pic-1.png" alt="image">
                             </td>
                             <td>@Html.DisplayFor(modeluser => user.Name) @Html.DisplayFor(modeluser => user.Surname)</td>
@@ -45,7 +45,19 @@
                                     <div class="progress-bar bg-success style1" style="width:@(user.ItemCount*25+"%")" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </td>
-                            <td class="item-count-td"><button type="button" class="btn btn-outline-danger btn-rounded">@Html.DisplayFor(modeluser => user.ItemCount)</button></td>
+                            @*<td class="item-count-td"><button type="button" class="btn btn-outline-danger btn-rounded">@Html.DisplayFor(modeluser => user.ItemCount)</button></td>*@
+
+                            <td class="dropdown item-count-td">
+                                <button type="button" class="dropbtn btn btn-outline-danger btn-rounded">@Html.DisplayFor(modeluser => user.ItemCount)</button>
+                                <div class="dropdown-content">
+                                    @foreach (var item in user.Items)
+                                    {
+                                        <a asp-controller="Items" asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modeluser => item.Name)</a>
+
+                                    }
+                                </div>
+                            </td>
+
                             <td class="text-primary">@Html.DisplayFor(modeluser => user.TotalValue)</td>
                             <td>@Html.DisplayFor(modeluser => user.LastItem)</td>
                             <td> @user.RecordCreateTime.Date.ToString("MM/dd/yyyy")</td>

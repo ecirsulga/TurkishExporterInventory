@@ -25,6 +25,13 @@ namespace TurkishExporterInventory
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication("CookieAuthentication")
+                 .AddCookie("CookieAuthentication", config =>
+                 {
+                     config.Cookie.Name = "UserLoginCookie";
+                     config.LoginPath = "/Login/UserLogin";
+                 });
+
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<EntityDbContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Transient);
 
@@ -45,9 +52,12 @@ namespace TurkishExporterInventory
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
@@ -55,7 +65,7 @@ namespace TurkishExporterInventory
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Login}/{id?}");
             });
         }
     }

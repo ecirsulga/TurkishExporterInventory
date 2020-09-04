@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TurkishExporterInventory.Database.Context;
+using TurkishExporterInventory.Database.Models;
 using TurkishExporterInventory.Models;
 
 namespace TurkishExporterInventory.Controllers
@@ -16,10 +18,21 @@ namespace TurkishExporterInventory.Controllers
         private readonly EntityDbContext _entityDbContext;
 
         
+        
         public HomeController(ILogger<HomeController> logger, EntityDbContext entityDbContext)
         {
+            
             _logger = logger;
             _entityDbContext = entityDbContext;
+        }
+
+        [Authorize]
+        public ActionResult Users()
+        {
+            List<User> users = new List<User>();
+            users = _entityDbContext.Users.ToList();
+
+            return View();
         }
 
         public IActionResult Index()
