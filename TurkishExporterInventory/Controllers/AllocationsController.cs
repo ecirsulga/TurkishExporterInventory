@@ -19,14 +19,12 @@ namespace TurkishExporterInventory.Controllers
             _context = context;
         }
 
-        // GET: Allocations
         public async Task<IActionResult> Index()
         {
             var entityDbContext = _context.Allocations.Include(a => a.Item).Include(a => a.User);
             return View(await entityDbContext.ToListAsync());
         }
 
-        // GET: Allocations/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,7 +44,6 @@ namespace TurkishExporterInventory.Controllers
             return View(allocation);
         }
 
-        // GET: Allocations/Create
         public IActionResult Create()
         {
             ViewData["rlt_Item_Id"] = new SelectList(_context.Items, "Id", "Id");
@@ -54,9 +51,6 @@ namespace TurkishExporterInventory.Controllers
             return View();
         }
 
-        // POST: Allocations/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Information,ItemGivenTime,rlt_User_Id,rlt_Item_Id,Id,RecordCreateTime")] Allocation allocation)
@@ -72,7 +66,6 @@ namespace TurkishExporterInventory.Controllers
             return View(allocation);
         }
 
-        // GET: Allocations/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -89,10 +82,6 @@ namespace TurkishExporterInventory.Controllers
             ViewData["rlt_User_Id"] = new SelectList(_context.Users, "Id", "Id", allocation.rlt_User_Id);
             return View(allocation);
         }
-
-        // POST: Allocations/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Information,ItemGivenTime,rlt_User_Id,rlt_Item_Id,Id,RecordCreateTime")] Allocation allocation)

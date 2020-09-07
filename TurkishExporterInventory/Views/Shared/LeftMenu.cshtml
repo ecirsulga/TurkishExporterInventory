@@ -1,0 +1,115 @@
+﻿@inject TurkishExporterInventory.Helpers.DataHelper _dataHelper
+@{
+    var userInfo = _dataHelper.GetCurrentUser();
+    
+}
+
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+        <li class="nav-item nav-profile">
+            <a href="#" class="nav-link">
+                <div class="profile-image">
+                    <img class="img-xs rounded-circle" src="~/assets/images/faces/face8.jpg" alt="profile image">
+                    <div class="dot-indicator bg-success"></div>
+                </div>
+                <div class="text-wrapper">
+                    <p class="profile-name">@userInfo.Name @userInfo.Surname</p>
+                    <p class="designation">@userInfo.Email</p>
+                </div>
+            </a>
+        </li>
+        <li class="nav-item nav-category">Main Menu</li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#departments-dropdown" aria-expanded="false" aria-controls="ui-basic">
+                <i class="menu-icon typcn typcn-coffee"></i>
+                <span class="menu-title">Departmanlar</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="departments-dropdown">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/../Departments/Create">Departman Ekleme</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/../Departments/Index">Departman Listesi</a>
+                    </li>
+
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#navbar-suppliers-dropdown" aria-expanded="false" aria-controls="ui-basic">
+                <i class="menu-icon typcn typcn-coffee"></i>
+                <span class="menu-title">Tedarikçiler</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="navbar-suppliers-dropdown">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/../Suppliers/Create">Tedarikçi Ekleme</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/../Suppliers/Index">Tedarikçi Listesi</a>
+                    </li>
+
+                </ul>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#items-dropdown" aria-expanded="false" aria-controls="ui-basic">
+                <i class="menu-icon typcn typcn-coffee"></i>
+                <span class="menu-title">Eşyalar</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="items-dropdown">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/../Items/AddItem">Eşya Ekleme</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/../Items/ItemList">Eşya Listesi</a>
+                    </li>
+
+                </ul>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#users-dropdown" aria-expanded="false" aria-controls="ui-basic">
+                <i class="menu-icon typcn typcn-coffee"></i>
+                <span class="menu-title">Kullanıcılar</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="users-dropdown">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/../Users/AddUser">Kullanıcı Ekleme</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/../Users/UserList">Kullanıcı Listesi</a>
+                    </li>
+
+                </ul>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="../../pages/forms/basic_elements.html">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Ayarlar</span>
+            </a>
+        </li>
+
+        <li class="nav-item mt-auto" style="display: inline-flex;">
+            <a class="nav-link" href="../../pages/forms/basic_elements.html">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">
+                    Çıkış Yap
+                </span>
+            </a>
+        </li>
+
+    </ul>
+</nav>

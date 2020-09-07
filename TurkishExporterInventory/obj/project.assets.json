@@ -1356,6 +1356,15 @@
       "popper.js/1.16.1": {
         "type": "package"
       },
+      "RestSharp/106.11.4": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/RestSharp.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/RestSharp.dll": {}
+        }
+      },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
         "type": "package",
         "runtimeTargets": {
@@ -3264,7 +3273,8 @@
           "EntityFramework": "6.4.4",
           "Microsoft.AspNetCore.Authentication.Cookies": "2.2.0",
           "Microsoft.EntityFrameworkCore": "3.1.7",
-          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.7"
+          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.7",
+          "RestSharp": "106.11.4"
         },
         "compile": {
           "bin/placeholder/TurkishExporterInventory.Database.dll": {}
@@ -5408,6 +5418,22 @@
         "content/Scripts/umd/popper.min.js.map",
         "popper.js.1.16.1.nupkg.sha512",
         "popper.js.nuspec"
+      ]
+    },
+    "RestSharp/106.11.4": {
+      "sha512": "vx35q52cM3UQNOiN3UqSQ9U7I5UeoyzVmjsWKQxOxn6FVu+n01+SNwhxc/jvf92WPBmmwzTV4VYTeTg4KviJdA==",
+      "type": "package",
+      "path": "restsharp/106.11.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net452/RestSharp.dll",
+        "lib/net452/RestSharp.xml",
+        "lib/netstandard2.0/RestSharp.dll",
+        "lib/netstandard2.0/RestSharp.xml",
+        "restsharp.106.11.4.nupkg.sha512",
+        "restsharp.nuspec",
+        "restsharp.png"
       ]
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
@@ -10239,6 +10265,7 @@
       "Microsoft.TypeScript.MSBuild >= 4.0.2",
       "Microsoft.VisualStudio.Web.CodeGeneration >= 3.1.4",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.4",
+      "RestSharp >= 106.11.4",
       "TurkishExporterInventory.Database >= 1.0.0",
       "bootstrap >= 4.5.2",
       "jQuery >= 3.5.1"
@@ -10322,6 +10349,10 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[3.1.4, )"
+          },
+          "RestSharp": {
+            "target": "Package",
+            "version": "[106.11.4, )"
           },
           "bootstrap": {
             "target": "Package",

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+tRghWuRlDVLi4+QaJ42wQnAj9s6L7eH2EPGPCurENjizLNCTbvDaGkURC9aPMlI704hNJ3fZwJRSQFStQrqlw==",
+  "dgSpecHash": "FhRyumVKp4Fg+/u58V81GkS5lH5kjnR4aK/Wkc2GDuxhMWbSSb+eGk2U5TMV9Cg0VJ6Y6ucOceDkg+BAEx6mug==",
   "success": true,
   "projectFilePath": "C:\\Users\\User\\Desktop\\TurkishExporter\\Envanter\\TurkishExporterInventory\\TurkishExporterInventory.csproj",
   "expectedPackageFiles": [
@@ -87,6 +87,7 @@
     "C:\\Users\\User\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\nuget.frameworks\\4.7.0\\nuget.frameworks.4.7.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\popper.js\\1.16.1\\popper.js.1.16.1.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\restsharp\\106.11.4\\restsharp.106.11.4.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",

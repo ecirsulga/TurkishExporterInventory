@@ -46,7 +46,6 @@ namespace TurkishExporterInventory.Controllers
             return View(items.ToList());
         }
 
-        // GET: Items/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -64,7 +63,6 @@ namespace TurkishExporterInventory.Controllers
             return View(item);
         }
 
-        // GET: Itemstry/Create
         public IActionResult AddItem()
         {
             var userselect = _context.Users.Select(x =>
@@ -79,9 +77,6 @@ namespace TurkishExporterInventory.Controllers
             return View();
         }
 
-        // POST: Itemstry/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public  IActionResult AddItem(ItemListModel item)
@@ -131,7 +126,6 @@ namespace TurkishExporterInventory.Controllers
             return View();
         }
 
-        // GET: Itemstry/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -166,9 +160,6 @@ namespace TurkishExporterInventory.Controllers
             return View(sendmodel);
         }
 
-        // POST: Itemstry/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, ItemListModel itemmodel)
@@ -222,7 +213,6 @@ namespace TurkishExporterInventory.Controllers
             return View(item);
         }
 
-        // GET: Itemstry/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

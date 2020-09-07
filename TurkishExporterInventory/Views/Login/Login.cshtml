@@ -28,6 +28,22 @@
                             <form asp-action="Login">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <div class="form-group">
+                                    @{
+                                        if (ViewBag.Message != null)
+                                        {
+                                            <div id="login-error">
+                                                <a class="alert alert-danger" style=" position: absolute;
+        top: -65px;
+        width: 740px;
+        left: 20px;
+        color: #ffffff;
+        background-color: #de4d4d;
+        font-size: 1rem;
+        text-align : center
+    ">@ViewBag.Message</a>
+</div>
+}
+                                    }
                                     <label class="label">Kullanıcı Adı</label>
                                     <div class="input-group">
                                         <input type="text" asp-for="Email" class="form-control" placeholder="E-Mail Adresiniz" />
@@ -52,8 +68,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" value="Login" class="btn btn-primary submit-btn btn-block" />
+                                    <input type="submit" value="Giriş Yap" class="btn btn-primary submit-btn btn-block" />
                                 </div>
+
+
+
+
                                 <div class="form-group d-flex justify-content-between">
                                     <div class="form-check form-check-flat mt-0">
                                         <label class="form-check-label">
@@ -73,9 +93,11 @@
                                 </div>
                             </form>
                         </div>
+
                         <ul class="auth-footer">
                             <li>
                                 <a href="#">Durum</a>
+
                             </li>
                             <li>
                                 <a href="#">Yardım</a>
@@ -94,7 +116,12 @@
     <script src="~/assets/vendors/js/vendor.bundle.addons.js"></script>
     <script src="~/assets/js/shared/off-canvas.js"></script>
     <script src="~/assets/js/shared/misc.js"></script>
-
-
+    <script>
+        $(document).ready(function () {
+            
+            $("#login-error").fadeOut(7000);
+            
+        });
+    </script>
 </body>
 </html>

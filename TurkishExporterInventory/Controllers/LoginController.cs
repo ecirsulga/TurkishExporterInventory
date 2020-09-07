@@ -5,7 +5,9 @@ using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RestSharp;
 using TurkishExporterInventory.Database.Context;
 using TurkishExporterInventory.Database.Models;
 
@@ -36,11 +38,21 @@ namespace TurkishExporterInventory.Controllers
         [HttpPost]
         public ActionResult Login([Bind] User user)
         {
-            
-            List<User> users = new List<User>();
-            users = _context.Users.ToList();
-            if (users.Any(u => u.Email== user.Email))
+            var  isUser = _context.Users.Any(u => u.Email == user.Email);
+            if (isUser)
             {
+
+                var entityUser= _context.Users.Where(u => u.Email == user.Email).Select(q=>new { q.Id, q.Email,q.Name, q.Password}).FirstOrDefault();
+                if (user.Password!=entityUser.Password)
+                {
+                    ViewBag.Message = "Hatalı parola girdiniz. Lütfen parolanızı doğru girdiğinizden emin olun!";
+                    return View(user);
+                }
+
+                CookieOptions option = new CookieOptions();
+
+                Response.Cookies.Append("loggedinuser", entityUser.Id.ToString(), option);
+
                 var userClaims = new List<Claim>()
                 {
                 new Claim(ClaimTypes.Email, user.Email),
@@ -54,10 +66,9 @@ namespace TurkishExporterInventory.Controllers
 
                 return RedirectToAction("Index", "Home");
             }
-
+            ViewBag.Message = "Kullanıcı bulunamadı. Bilgilerinizi tekrar kontrol edin!";
             return View(user);
         }
-
 
     }
 }
