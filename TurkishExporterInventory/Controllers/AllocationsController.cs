@@ -116,7 +116,6 @@ namespace TurkishExporterInventory.Controllers
             return View(allocation);
         }
 
-        // GET: Allocations/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,7 +135,6 @@ namespace TurkishExporterInventory.Controllers
             return View(allocation);
         }
 
-        // POST: Allocations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

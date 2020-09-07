@@ -11,7 +11,6 @@ namespace TurkishExporterInventory.Helpers
     public class DataHelper
     {
         private readonly EntityDbContext _entityDbContext;
-        private readonly User _dataHelper;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public DataHelper(EntityDbContext entityDbContext,IHttpContextAccessor httpContextAccessor)
