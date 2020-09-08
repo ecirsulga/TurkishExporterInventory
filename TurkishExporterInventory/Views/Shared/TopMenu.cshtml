@@ -1,7 +1,13 @@
-﻿@inject TurkishExporterInventory.Helpers.DataHelper _dataHelper
+﻿@using System.Security.Claims
+@inject TurkishExporterInventory.Helpers.DataHelper _dataHelper
 @{
-    var userInfo = _dataHelper.GetCurrentUser();
+    var userInfo = new TurkishExporterInventory.Database.Models.LayoutModel();
+    if (User.IsInRole("user"))
+    {
+        userInfo = _dataHelper.GetCurrentUser(User.Claims.Select(q => q.Value).FirstOrDefault());
+    }
 }
+
 
 
 <div class="navbar-menu-wrapper d-flex align-items-center">

@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="~/assets/vendors/css/vendor.bundle.addons.css">
     <link rel="stylesheet" href="~/assets/css/shared/style.css">
     <link rel="shortcut icon" href="~/assets/images/favicon.png">
+    <link rel="stylesheet" href="~/css/LoginPage/login-page.css">
 </head>
 <body class="purchase-banner-active">
     <div class="container-scroller">
@@ -32,21 +33,13 @@
                                         if (ViewBag.Message != null)
                                         {
                                             <div id="login-error">
-                                                <a class="alert alert-danger" style=" position: absolute;
-        top: -65px;
-        width: 740px;
-        left: 20px;
-        color: #ffffff;
-        background-color: #de4d4d;
-        font-size: 1rem;
-        text-align : center
-    ">@ViewBag.Message</a>
-</div>
-}
+                                                <a class="alert alert-danger login-error">@ViewBag.Message</a>
+                                            </div>
+                                        }
                                     }
                                     <label class="label">Kullanıcı Adı</label>
                                     <div class="input-group">
-                                        <input type="text" asp-for="Email" class="form-control" placeholder="E-Mail Adresiniz" />
+                                        <input name="Email" type="text" asp-for="Email" class="form-control" placeholder="E-Mail Adresiniz" />
                                         <span asp-validation-for="Email" class="text-danger"></span>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
@@ -58,7 +51,7 @@
                                 <div class="form-group">
                                     <label class="label">Parola</label>
                                     <div class="input-group">
-                                        <input type="password" asp-for="Password" class="form-control" placeholder="*********" />
+                                        <input name="Password" type="password" asp-for="Password" class="form-control" placeholder="*********" />
                                         <span asp-validation-for="Password" class="text-danger"></span>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
@@ -118,9 +111,9 @@
     <script src="~/assets/js/shared/misc.js"></script>
     <script>
         $(document).ready(function () {
-            
+
             $("#login-error").fadeOut(7000);
-            
+
         });
     </script>
 </body>

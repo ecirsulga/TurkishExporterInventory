@@ -356,7 +356,7 @@ C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debu
 C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Home\Register.cshtml.g.cs
 C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Login\Login.cshtml.g.cs
 C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\bin\Debug\netcoreapp3.1\RestSharp.dll
-C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\TurkishExporterInventory.csproj.CoreCompileInputs.cache
-C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\TurkishExporterInventory.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Shared\LeftMenu.cshtml.g.cs
 C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\Razor\Views\Shared\TopMenu.cshtml.g.cs
+C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\TurkishExporterInventory.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\TurkishExporter\Envanter\TurkishExporterInventory\obj\Debug\netcoreapp3.1\TurkishExporterInventory.MvcApplicationPartsAssemblyInfo.cache

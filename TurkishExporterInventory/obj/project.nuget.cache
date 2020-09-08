@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "FhRyumVKp4Fg+/u58V81GkS5lH5kjnR4aK/Wkc2GDuxhMWbSSb+eGk2U5TMV9Cg0VJ6Y6ucOceDkg+BAEx6mug==",
+  "dgSpecHash": "ZzoP/M+6dWEH7nKgMD/GaO7GumRawnqB3C7GZ4vK3+tPXRWXRQDScVp0BC4xEI/wvBXlkIR2NmS5Cl+/2Ln1Zg==",
   "success": true,
   "projectFilePath": "C:\\Users\\User\\Desktop\\TurkishExporter\\Envanter\\TurkishExporterInventory\\TurkishExporterInventory.csproj",
   "expectedPackageFiles": [
@@ -24,6 +24,7 @@
     "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\3.1.0\\microsoft.aspnetcore.razor.language.3.1.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.razor.runtime\\2.2.0\\microsoft.aspnetcore.razor.runtime.2.2.0.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.session\\2.2.0\\microsoft.aspnetcore.session.2.2.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.webutilities\\2.2.0\\microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",

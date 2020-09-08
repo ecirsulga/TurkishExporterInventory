@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -20,117 +21,153 @@ namespace TurkishExporterInventory.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Departments.ToListAsync());
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
+            {
+                return View(await _context.Departments.ToListAsync());
+            }
+            return RedirectToAction("Logout", "Login");
         }
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var department = await _context.Departments
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (department == null)
-            {
-                return NotFound();
-            }
+                var department = await _context.Departments
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (department == null)
+                {
+                    return NotFound();
+                }
 
-            return View(department);
+                return View(department);
+            }
+            return RedirectToAction("Logout", "Login");
         }
 
         public IActionResult Create()
         {
-            return View();
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
+            {
+                return View();
+            }
+            return RedirectToAction("Logout", "Login");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,Phone,Email,Id")] Department department)
         {
-            department.RecordCreateTime = DateTime.Now;
-            if (ModelState.IsValid)
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
             {
-                _context.Add(department);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                department.RecordCreateTime = DateTime.Now;
+                if (ModelState.IsValid)
+                {
+                    _context.Add(department);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+
+                return View(department);
             }
-            return View(department);
+            return RedirectToAction("Logout", "Login");
         }
 
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var department = await _context.Departments.FindAsync(id);
-            if (department == null)
-            {
-                return NotFound();
+                var department = await _context.Departments.FindAsync(id);
+                if (department == null)
+                {
+                    return NotFound();
+                }
+
+                return View(department);
             }
-            return View(department);
+            return RedirectToAction("Logout", "Login");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Name,Phone,Email,Id")] Department department)
         {
-            department.RecordCreateTime = DateTime.Now;
-            if (id != department.Id)
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
             {
-                return NotFound();
-            }
+                department.RecordCreateTime = DateTime.Now;
+                if (id != department.Id)
+                {
+                    return NotFound();
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(department);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!DepartmentExists(department.Id))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(department);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!DepartmentExists(department.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
+
+                return View(department);
             }
-            return View(department);
+            return RedirectToAction("Logout", "Login");
         }
 
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var department = await _context.Departments
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (department == null)
-            {
-                return NotFound();
-            }
+                var department = await _context.Departments
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (department == null)
+                {
+                    return NotFound();
+                }
 
-            return View(department);
+                return View(department);
+            }
+            return RedirectToAction("Logout", "Login");
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var department = await _context.Departments.FindAsync(id);
-            _context.Departments.Remove(department);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
+            {
+                var department = await _context.Departments.FindAsync(id);
+                _context.Departments.Remove(department);
+                await _context.SaveChangesAsync();
+
+                return View(nameof(Index));
+            }
+            return RedirectToAction("Logout", "Login");
         }
 
         private bool DepartmentExists(int id)

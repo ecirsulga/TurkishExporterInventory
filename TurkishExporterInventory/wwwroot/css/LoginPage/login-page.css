@@ -1,0 +1,10 @@
+﻿.login-error {
+    position: absolute;
+    top: -65px;
+    width: 740px;
+    left: 20px;
+    color: #ffffff !important;
+    background-color: #de4d4d;
+    font-size: 1rem !important;
+    text-align: center
+}

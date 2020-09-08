@@ -1,7 +1,11 @@
-﻿@inject TurkishExporterInventory.Helpers.DataHelper _dataHelper
+﻿@using System.Security.Claims
+@inject TurkishExporterInventory.Helpers.DataHelper _dataHelper
 @{
-    var userInfo = _dataHelper.GetCurrentUser();
-    
+    var userInfo = new TurkishExporterInventory.Database.Models.LayoutModel();
+    if (User.IsInRole("user"))
+    {
+        userInfo = _dataHelper.GetCurrentUser(User.Claims.Select(q => q.Value).FirstOrDefault());
+    }
 }
 
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -103,7 +107,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" asp-controller="Login" asp-action="Login">
+            <a class="nav-link" asp-controller="Login" asp-action="Logout">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
                 <span class="menu-title">
                     Çıkış Yap

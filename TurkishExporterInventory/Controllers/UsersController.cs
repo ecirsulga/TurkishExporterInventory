@@ -19,145 +19,186 @@ namespace TurkishExporterInventory.Controllers
         public UsersController(EntityDbContext context)
         {
             _context = context;
-            
+
         }
 
         public IActionResult UserList()
         {
-            var users = _context.Users.Select(q => new UserListModel()
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
             {
-                Id = q.Id,
-                Name = q.Name,
-                Surname = q.Surname,
-                Department = q.Department.Name,
-                ItemCount = q.Allocations.Count,
-                Position = q.Position,
-                RecordCreateTime = q.RecordCreateTime,
-                TotalValue = q.Allocations.Where(w => w.rlt_User_Id == q.Id).OrderByDescending(o => o.RecordCreateTime).Select(s => s.Item.PriceTL).Sum() ?? 0,
-                LastItem = q.Allocations.Where(w => w.rlt_User_Id == q.Id).OrderByDescending(o => o.RecordCreateTime).Select(s => s.Item.Name).FirstOrDefault() ?? "Tahsis Yok",
-                Items = q.Allocations.Where(w => w.rlt_User_Id == q.Id).OrderByDescending(o => o.RecordCreateTime).Select(s => s.Item).ToList()
-            }); ;
+                var users = _context.Users.Select(q => new UserListModel()
+                {
+                    Id = q.Id,
+                    Name = q.Name,
+                    Surname = q.Surname,
+                    Department = q.Department.Name,
+                    ItemCount = q.Allocations.Count,
+                    Position = q.Position,
+                    RecordCreateTime = q.RecordCreateTime,
+                    TotalValue = q.Allocations.Where(w => w.rlt_User_Id == q.Id).OrderByDescending(o => o.RecordCreateTime).Select(s => s.Item.PriceTL).Sum() ?? 0,
+                    LastItem = q.Allocations.Where(w => w.rlt_User_Id == q.Id).OrderByDescending(o => o.RecordCreateTime).Select(s => s.Item.Name).FirstOrDefault() ?? "Tahsis Yok",
+                    Items = q.Allocations.Where(w => w.rlt_User_Id == q.Id).OrderByDescending(o => o.RecordCreateTime).Select(s => s.Item).ToList()
+                }); ;
 
-            return View(users.ToList());
+
+                return View(users.ToList());
+            }
+            return RedirectToAction("Logout", "Login");
         }
 
 
 
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var user = await _context.Users
-                .Include(u => u.Department)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
+                var user = await _context.Users
+                    .Include(u => u.Department)
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (user == null)
+                {
+                    return NotFound();
+                }
 
-            return View(user);
+                return View(user);
+            }
+            return RedirectToAction("Logout", "Login");
         }
 
         public IActionResult AddUser()
         {
-            ViewData["rlt_Department_Id"] = new SelectList(_context.Departments, "Id", "Name");
-            return View();
+
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
+            {
+                ViewData["rlt_Department_Id"] = new SelectList(_context.Departments, "Id", "Name");
+                return View();
+            }
+            return RedirectToAction("Logout", "Login");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddUser([Bind("Name,Surname,rlt_Department_Id,Position,Password,Phone,Email,Id")] User user)
         {
-            user.RecordCreateTime = DateTime.Now;
-            if (ModelState.IsValid)
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
             {
-                _context.Add(user);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(UserList));
+                user.RecordCreateTime = DateTime.Now;
+                if (ModelState.IsValid)
+                {
+                    _context.Add(user);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(UserList));
+                }
+                ViewData["rlt_Department_Id"] = new SelectList(_context.Departments, "Id", "Id", user.rlt_Department_Id);
+
+                return View(user);
             }
-            ViewData["rlt_Department_Id"] = new SelectList(_context.Departments, "Id", "Id", user.rlt_Department_Id);
-            return View(user);
+            return RedirectToAction("Logout", "Login");
         }
 
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
+                var user = await _context.Users.FindAsync(id);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                ViewData["rlt_Department_Id"] = new SelectList(_context.Departments, "Id", "Name", user.rlt_Department_Id);
+
+                return View(user);
             }
-            ViewData["rlt_Department_Id"] = new SelectList(_context.Departments, "Id", "Name", user.rlt_Department_Id);
-            return View(user);
+            return RedirectToAction("Logout", "Login");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Name,Surname,rlt_Department_Id,Position,Password,Phone,Email,Id")] User user)
         {
-            user.RecordCreateTime = DateTime.Now;
-            if (id != user.Id)
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
             {
-                return NotFound();
-            }
+                user.RecordCreateTime = DateTime.Now;
+                if (id != user.Id)
+                {
+                    return NotFound();
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UserExists(user.Id))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(user);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!UserExists(user.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(UserList));
                 }
-                return RedirectToAction(nameof(UserList));
+
+                ViewData["rlt_Department_Id"] = new SelectList(_context.Departments, "Id", "Name", user.rlt_Department_Id);
+
+                return View(user);
             }
-            ViewData["rlt_Department_Id"] = new SelectList(_context.Departments, "Id", "Id", user.rlt_Department_Id);
-            return View(user);
+            return RedirectToAction("Logout", "Login");
         }
 
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var user = await _context.Users
-                .Include(u => u.Department)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
+                var user = await _context.Users
+                    .Include(u => u.Department)
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (user == null)
+                {
+                    return NotFound();
+                }
 
-            return View(user);
+
+                return View(user);
+            }
+            return RedirectToAction("Logout", "Login");
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(UserList));
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
+            {
+                var user = await _context.Users.FindAsync(id);
+                _context.Users.Remove(user);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(UserList));
+            }
+            return RedirectToAction("Logout", "Login");
         }
 
         private bool UserExists(int id)

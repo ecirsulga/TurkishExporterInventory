@@ -28,15 +28,6 @@ namespace TurkishExporterInventory.Controllers
             _entityDbContext = entityDbContext;
         }
 
-        [Authorize]
-        public ActionResult Users()
-        {
-            List<User> users = new List<User>();
-            users = _entityDbContext.Users.ToList();
-
-            return View();
-        }
-
         public IActionResult Index()
         {
             //read cookie from Request object  
@@ -47,19 +38,30 @@ namespace TurkishExporterInventory.Controllers
             //model.Name = loggedInUser.Name;
             //model.Surname = loggedInUser.Surname;
 
-
-            return View();
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
+            {
+                return View();
+            }
+            return RedirectToAction("Logout", "Login");
         }
 
         public IActionResult Privacy()
         {
-            return View();
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
+            {
+                return View();
+            }
+            return RedirectToAction("Logout", "Login");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
+            {
+                return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
+            return RedirectToAction("Logout", "Login");
         }
     }
 }

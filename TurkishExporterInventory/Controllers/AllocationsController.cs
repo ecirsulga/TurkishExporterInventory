@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -21,128 +22,168 @@ namespace TurkishExporterInventory.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var entityDbContext = _context.Allocations.Include(a => a.Item).Include(a => a.User);
-            return View(await entityDbContext.ToListAsync());
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
+            {
+                var entityDbContext = _context.Allocations.Include(a => a.Item).Include(a => a.User);
+
+                return View(await entityDbContext.ToListAsync());
+            }
+            return RedirectToAction("Logout", "Login");
         }
 
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var allocation = await _context.Allocations
-                .Include(a => a.Item)
-                .Include(a => a.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (allocation == null)
-            {
-                return NotFound();
-            }
+                var allocation = await _context.Allocations
+                    .Include(a => a.Item)
+                    .Include(a => a.User)
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (allocation == null)
+                {
+                    return NotFound();
+                }
 
-            return View(allocation);
+                return View(allocation);
+            }
+            return RedirectToAction("Logout", "Login");
         }
 
         public IActionResult Create()
         {
-            ViewData["rlt_Item_Id"] = new SelectList(_context.Items, "Id", "Id");
-            ViewData["rlt_User_Id"] = new SelectList(_context.Users, "Id", "Id");
-            return View();
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
+            {
+                ViewData["rlt_Item_Id"] = new SelectList(_context.Items, "Id", "Id");
+                ViewData["rlt_User_Id"] = new SelectList(_context.Users, "Id", "Id");
+
+                return View();
+            }
+            return RedirectToAction("Logout", "Login");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Information,ItemGivenTime,rlt_User_Id,rlt_Item_Id,Id,RecordCreateTime")] Allocation allocation)
         {
-            if (ModelState.IsValid)
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
             {
-                _context.Add(allocation);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(allocation);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["rlt_Item_Id"] = new SelectList(_context.Items, "Id", "Id", allocation.rlt_Item_Id);
+                ViewData["rlt_User_Id"] = new SelectList(_context.Users, "Id", "Id", allocation.rlt_User_Id);
+
+                return View(allocation);
             }
-            ViewData["rlt_Item_Id"] = new SelectList(_context.Items, "Id", "Id", allocation.rlt_Item_Id);
-            ViewData["rlt_User_Id"] = new SelectList(_context.Users, "Id", "Id", allocation.rlt_User_Id);
-            return View(allocation);
+            return RedirectToAction("Logout", "Login");
         }
 
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var allocation = await _context.Allocations.FindAsync(id);
-            if (allocation == null)
-            {
-                return NotFound();
+                var allocation = await _context.Allocations.FindAsync(id);
+                if (allocation == null)
+                {
+                    return NotFound();
+                }
+                ViewData["rlt_Item_Id"] = new SelectList(_context.Items, "Id", "Id", allocation.rlt_Item_Id);
+                ViewData["rlt_User_Id"] = new SelectList(_context.Users, "Id", "Id", allocation.rlt_User_Id);
+
+                return View(allocation);
             }
-            ViewData["rlt_Item_Id"] = new SelectList(_context.Items, "Id", "Id", allocation.rlt_Item_Id);
-            ViewData["rlt_User_Id"] = new SelectList(_context.Users, "Id", "Id", allocation.rlt_User_Id);
-            return View(allocation);
+            return RedirectToAction("Logout", "Login");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Information,ItemGivenTime,rlt_User_Id,rlt_Item_Id,Id,RecordCreateTime")] Allocation allocation)
         {
-            if (id != allocation.Id)
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
             {
-                return NotFound();
-            }
+                if (id != allocation.Id)
+                {
+                    return NotFound();
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(allocation);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AllocationExists(allocation.Id))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(allocation);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!AllocationExists(allocation.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
+                ViewData["rlt_Item_Id"] = new SelectList(_context.Items, "Id", "Id", allocation.rlt_Item_Id);
+                ViewData["rlt_User_Id"] = new SelectList(_context.Users, "Id", "Id", allocation.rlt_User_Id);
+
+
+                return View(allocation);
             }
-            ViewData["rlt_Item_Id"] = new SelectList(_context.Items, "Id", "Id", allocation.rlt_Item_Id);
-            ViewData["rlt_User_Id"] = new SelectList(_context.Users, "Id", "Id", allocation.rlt_User_Id);
-            return View(allocation);
+            return RedirectToAction("Logout", "Login");
         }
 
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var allocation = await _context.Allocations
-                .Include(a => a.Item)
-                .Include(a => a.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (allocation == null)
-            {
-                return NotFound();
-            }
+                var allocation = await _context.Allocations
+                    .Include(a => a.Item)
+                    .Include(a => a.User)
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (allocation == null)
+                {
+                    return NotFound();
+                }
 
-            return View(allocation);
+
+                return View(allocation);
+            }
+            return RedirectToAction("Logout", "Login");
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var allocation = await _context.Allocations.FindAsync(id);
-            _context.Allocations.Remove(allocation);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
+            {
+                var allocation = await _context.Allocations.FindAsync(id);
+                _context.Allocations.Remove(allocation);
+                await _context.SaveChangesAsync();
+
+                return View(nameof(Index));
+            }
+            return RedirectToAction("Logout", "Login");
         }
 
         private bool AllocationExists(int id)
