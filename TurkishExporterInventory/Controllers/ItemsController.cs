@@ -82,7 +82,6 @@ namespace TurkishExporterInventory.Controllers
                     Name = x.Name + " " + x.Surname
                 });
 
-
                 ViewData["rlt_Supplier_Id"] = new SelectList(_context.Suppliers, "Id", "Name");
                 ViewData["rlt_User_Id"] = new SelectList(userselect, "Id", "Name", 0).Append(new SelectListItem("Şimdilik kimseye verilmeyecek.", "0")).OrderBy(i => i.Value);
                 return View();
@@ -141,7 +140,7 @@ namespace TurkishExporterInventory.Controllers
 
         }
 
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
             {
@@ -149,7 +148,7 @@ namespace TurkishExporterInventory.Controllers
                 {
                     return NotFound();
                 }
-                var item = await _context.Items.FindAsync(id);
+                var item = _context.Items.Find(id);
                 if (item == null)
                 {
                     return NotFound();
@@ -164,6 +163,12 @@ namespace TurkishExporterInventory.Controllers
                 sendmodel.BuyingDate = item.BuyingDate;
                 sendmodel.rlt_Supplier_Id = item.rlt_Supplier_Id;
                 sendmodel.rlt_User_Id = rlt_User_Id;
+                if (item.ReturnDate != null)
+                {
+                    sendmodel.ReturnDate = (DateTime)item.ReturnDate;
+                }
+
+                sendmodel.LastUser = _context.Allocations.Where(w => w.rlt_Item_Id == id).OrderByDescending(o => o.RecordCreateTime).Select(s => s.User.Name + " " + s.User.Surname).FirstOrDefault() ?? null;
 
                 var userselect = _context.Users.Select(x =>
                 new
@@ -192,6 +197,10 @@ namespace TurkishExporterInventory.Controllers
                 item.Purpose = itemmodel.Purpose;
                 item.BuyingDate = itemmodel.BuyingDate;
                 item.rlt_Supplier_Id = itemmodel.rlt_Supplier_Id;
+                if(itemmodel.ReturnDate!=null)
+                {
+                    item.ReturnDate = itemmodel.ReturnDate;
+                }
 
                 item.RecordCreateTime = DateTime.Now;
                 if (id != item.Id)
@@ -238,6 +247,9 @@ namespace TurkishExporterInventory.Controllers
             return RedirectToAction("Logout", "Login");
         }
 
+
+
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
@@ -248,18 +260,30 @@ namespace TurkishExporterInventory.Controllers
                 }
 
                 var item = await _context.Items
-                    .Include(i => i.Supplier)
+                    .Include(u => u.Supplier)
                     .FirstOrDefaultAsync(m => m.Id == id);
                 if (item == null)
                 {
                     return NotFound();
                 }
-                item = await _context.Items.FindAsync(id);
+
+
+                return View(item);
+            }
+            return RedirectToAction("Logout", "Login");
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            if (User.Claims.Select(q => q.Value).FirstOrDefault() != null && HttpContext.Session.GetString("UserLoginEmail") == User.Claims.Select(q => q.Value).FirstOrDefault())
+            {
+                var item = await _context.Items.FindAsync(id);
                 _context.Items.Remove(item);
                 await _context.SaveChangesAsync();
 
-
-                return View(nameof(ItemList));
+                return RedirectToAction(nameof(ItemList));
             }
             return RedirectToAction("Logout", "Login");
         }

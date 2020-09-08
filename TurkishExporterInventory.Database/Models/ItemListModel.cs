@@ -36,6 +36,8 @@ namespace TurkishExporterInventory.Database.Models
         public DateTime BuyingDate { get; set; }
 
         public int rlt_Supplier_Id { get; set; }
+
+        public DateTime ReturnDate { get; set; }
     }
 
     

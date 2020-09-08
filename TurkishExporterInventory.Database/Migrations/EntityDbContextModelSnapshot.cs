@@ -101,6 +101,9 @@ namespace TurkishExporterInventory.Database.Migrations
                     b.Property<DateTime>("RecordCreateTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("ReturnDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("rlt_Supplier_Id")
                         .HasColumnType("int");
 

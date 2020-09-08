@@ -27,9 +27,11 @@ namespace TurkishExporterInventory.Database.Models
         public virtual ICollection<Allocation> Allocations { get; set; }
 
         public int rlt_Supplier_Id { get; set; }
-        [ForeignKey("rlt_Supplier_Id")]
 
-        public Supplier Supplier { get; set; }
+        [ForeignKey("rlt_Supplier_Id")]
+        public virtual Supplier Supplier { get; set; }
+
+        public DateTime? ReturnDate { get; set; }
 
     }
 }

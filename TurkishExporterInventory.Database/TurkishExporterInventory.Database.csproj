@@ -9,10 +9,17 @@
     <Compile Remove="Migrations\20200716143846_InitialMigration.Designer.cs" />
     <Compile Remove="Migrations\20200717124548_RelationsAddedMigration.cs" />
     <Compile Remove="Migrations\20200717124548_RelationsAddedMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200908132237_RevertLastMigration.cs" />
+    <Compile Remove="Migrations\20200908132237_RevertLastMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200908132500_RevertMigration.cs" />
+    <Compile Remove="Migrations\20200908132500_RevertMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200908133750_RevertMigration.cs" />
+    <Compile Remove="Migrations\20200908133750_RevertMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200908133817_asdas.cs" />
+    <Compile Remove="Migrations\20200908133817_asdas.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
@@ -21,10 +28,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.7">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="RestSharp" Version="106.11.4" />
   </ItemGroup>
 

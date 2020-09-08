@@ -19,7 +19,7 @@ namespace TurkishExporterInventory.Database.Models
         public int rlt_Department_Id { get; set; }
 
         [ForeignKey("rlt_Department_Id")]
-        public Department Department { get; set; }
+        public virtual Department Department { get; set; }
 
         [AllowNull]
         [MaxLength(50)]
