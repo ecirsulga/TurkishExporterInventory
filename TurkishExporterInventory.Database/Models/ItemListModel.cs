@@ -17,11 +17,11 @@ namespace TurkishExporterInventory.Database.Models
 
         public string Purpose { get; set; }
 
-        public string LastUser { get; set; }
+        public string LastUserName { get; set; }
+
+        public int LastUserId { get; set; }
 
         public int ItemOwnersCount { get; set; }
-
-        public DateTime BoughtDate { get; set; }
 
         public string BoughtPlace { get; set; }
 
@@ -38,6 +38,8 @@ namespace TurkishExporterInventory.Database.Models
         public int rlt_Supplier_Id { get; set; }
 
         public DateTime ReturnDate { get; set; }
+
+        public Supplier Supplier { get; set; }
     }
 
     

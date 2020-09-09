@@ -1,4 +1,4 @@
-﻿@model TurkishExporterInventory.Database.Models.Item
+﻿@model TurkishExporterInventory.Database.Models.ItemListModel
 
 @{
     ViewData["Title"] = "Details";
@@ -11,42 +11,66 @@
     <h4>Item</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PriceTL)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PriceTL)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Purpose)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Purpose)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.BuyingDate)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.BuyingDate)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Supplier)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.rlt_Supplier_Id)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Supplier.Id)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.rlt_Supplier_Id)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.RecordCreateTime)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.RecordCreateTime)
         </dd>
+        <dt class="col-sm-2">
+            <span>Eşya Durumu</span>
+        </dt>
+        <dd class="col-sm-10">
+            @{
+
+
+                if (Model.LastUserName == null)
+                {
+                    <span>Eşya daha önce kimseye tahsis edilmemiş.</span>
+                }
+
+                else if(Model.ReturnDate == DateTime.MinValue)
+                {
+                    <span>Eşya @Model.LastUserName 'ın elinde.</span>
+                }
+                else
+                {
+                    <span>Eşya @Model.LastUserName adlı kullanıcı tarafından @Model.ReturnDate.Date.ToString("MM/dd/yyyy") tarihinde şirkete teslim edilmiş.</span>
+                }
+
+            }
+        </dd>
+
     </dl>
 </div>
 <div>

@@ -37,9 +37,9 @@ namespace TurkishExporterInventory.Controllers
                         Name = q.Name,
                         PriceTL = q.PriceTL,
                         Purpose = q.Purpose,
-                        BoughtDate = q.BuyingDate,
+                        BuyingDate = q.BuyingDate,
                         BoughtPlace = q.Supplier.Name,
-                        LastUser = q.Allocations.Where(w => w.rlt_Item_Id == q.Id).OrderByDescending(o => o.RecordCreateTime).Select(s => s.User.Name + " " + s.User.Surname).FirstOrDefault() ?? "Tahsis Yok",
+                        LastUserName = q.Allocations.Where(w => w.rlt_Item_Id == q.Id).OrderByDescending(o => o.RecordCreateTime).Select(s => s.User.Name + " " + s.User.Surname).FirstOrDefault() ?? "Tahsis Yok",
                         ItemOwnersCount = q.Allocations.Count,
                         RecordCreateTime = q.RecordCreateTime
                     });
@@ -61,12 +61,23 @@ namespace TurkishExporterInventory.Controllers
 
                 var item = await _context.Items
                     .FirstOrDefaultAsync(m => m.Id == id);
+                var itemModel = new ItemListModel();
+                itemModel.Id = item.Id;
+                itemModel.Name = item.Name;
+                itemModel.PriceTL = item.PriceTL;
+                itemModel.Purpose = item.Purpose;
+                itemModel.RecordCreateTime = DateTime.Now;
+                itemModel.rlt_Supplier_Id = item.rlt_Supplier_Id;
+                itemModel.BuyingDate = item.BuyingDate;
+                itemModel.LastUserName = _context.Allocations.Where(w => w.rlt_Item_Id == id).OrderByDescending(o => o.RecordCreateTime).Select(s => s.User.Name + " " + s.User.Surname).FirstOrDefault() ?? null;
+                if(item.ReturnDate!=null)
+                    itemModel.ReturnDate = (DateTime)item.ReturnDate;
                 if (item == null)
                 {
                     return NotFound();
                 }
 
-                return View(item);
+                return View(itemModel);
             }
             return RedirectToAction("Logout", "Login");
         }
@@ -82,7 +93,7 @@ namespace TurkishExporterInventory.Controllers
                     Name = x.Name + " " + x.Surname
                 });
 
-                ViewData["rlt_Supplier_Id"] = new SelectList(_context.Suppliers, "Id", "Name");
+                ViewData["rlt_Supplier_Id"] = new SelectList(_context.Suppliers, "Id", "Name").Append(new SelectListItem("Yeni Tedarikçi Ekle", "0"));
                 ViewData["rlt_User_Id"] = new SelectList(userselect, "Id", "Name", 0).Append(new SelectListItem("Şimdilik kimseye verilmeyecek.", "0")).OrderBy(i => i.Value);
                 return View();
             }
@@ -105,8 +116,23 @@ namespace TurkishExporterInventory.Controllers
                         itemModel.PriceTL = item.PriceTL;
                         itemModel.Purpose = item.Purpose;
                         itemModel.RecordCreateTime = DateTime.Now;
-                        itemModel.rlt_Supplier_Id = item.rlt_Supplier_Id;
 
+                        if (item.rlt_Supplier_Id == 0)
+                        {
+                            var supplier = new Supplier();
+                            supplier.RecordCreateTime = DateTime.Now;
+                            supplier.Name = item.Supplier.Name;
+                            supplier.Phone = item.Supplier.Phone;
+                            supplier.Email = item.Supplier.Email;
+                            _context.Suppliers.Add(supplier);
+                            _context.SaveChanges();
+                            itemModel.rlt_Supplier_Id = supplier.Id;
+                        }
+                        else
+                        {
+                            itemModel.rlt_Supplier_Id = item.rlt_Supplier_Id;
+                        }
+                        itemModel.BuyingDate = item.BuyingDate;
                         _context.Items.Add(itemModel);
                         _context.SaveChanges();
 
@@ -123,9 +149,12 @@ namespace TurkishExporterInventory.Controllers
                             _context.SaveChanges();
                         }
 
+                        
+                        
+
                     }
 
-
+                    
 
 
 
@@ -133,7 +162,7 @@ namespace TurkishExporterInventory.Controllers
                 }
 
                 ViewData["rlt_User_Id"] = new SelectList(_context.Users, "Id", "Name");
-                ViewData["rlt_Supplier_Id"] = new SelectList(_context.Suppliers, "Id", "Name", item.rlt_Supplier_Id);
+                ViewData["rlt_Supplier_Id"] = new SelectList(_context.Suppliers, "Id", "Name");
                 return View();
             }
             return RedirectToAction("Logout", "Login");
@@ -163,12 +192,14 @@ namespace TurkishExporterInventory.Controllers
                 sendmodel.BuyingDate = item.BuyingDate;
                 sendmodel.rlt_Supplier_Id = item.rlt_Supplier_Id;
                 sendmodel.rlt_User_Id = rlt_User_Id;
-                if (item.ReturnDate != null)
-                {
-                    sendmodel.ReturnDate = (DateTime)item.ReturnDate;
-                }
 
-                sendmodel.LastUser = _context.Allocations.Where(w => w.rlt_Item_Id == id).OrderByDescending(o => o.RecordCreateTime).Select(s => s.User.Name + " " + s.User.Surname).FirstOrDefault() ?? null;
+
+                sendmodel.LastUserName = _context.Allocations.Where(w => w.rlt_Item_Id == id).OrderByDescending(o => o.RecordCreateTime).Select(s => s.User.Name + " " + s.User.Surname).FirstOrDefault() ?? null;
+                if (sendmodel.LastUserName != null)
+                {
+                    sendmodel.ReturnDate = DateTime.Now;
+                }
+                sendmodel.LastUserId = _context.Allocations.Where(w => w.rlt_Item_Id == id).OrderByDescending(o => o.RecordCreateTime).Select(s => s.User.Id).FirstOrDefault();
 
                 var userselect = _context.Users.Select(x =>
                 new
@@ -197,7 +228,7 @@ namespace TurkishExporterInventory.Controllers
                 item.Purpose = itemmodel.Purpose;
                 item.BuyingDate = itemmodel.BuyingDate;
                 item.rlt_Supplier_Id = itemmodel.rlt_Supplier_Id;
-                if(itemmodel.ReturnDate!=null)
+                if (itemmodel.ReturnDate != null)
                 {
                     item.ReturnDate = itemmodel.ReturnDate;
                 }

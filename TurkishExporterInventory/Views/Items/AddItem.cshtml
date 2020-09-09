@@ -37,8 +37,31 @@
                                     </div>
                                     <div class="form-group">
                                         <label asp-for="rlt_Supplier_Id" class="control-label">Tedarikçi</label>
-                                        <select asp-for="rlt_Supplier_Id" class="form-control" asp-items="ViewBag.rlt_Supplier_Id"></select>
+                                        <select asp-for="rlt_Supplier_Id" class="form-control" id="supplierSelect" onchange="javascript:sec(this)" asp-items="ViewBag.rlt_Supplier_Id"></select>
                                     </div>
+                                    
+                                    <div id="addNewSupplier" class="d-none">
+
+                                        <div class="form-group">
+                                            <label asp-for="Supplier.Name" class="control-label add-form-titles">Tedarikçi Adı</label>
+                                            <input asp-for="Supplier.Name" class="form-control" />
+                                            <span asp-validation-for="Supplier.Name" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Supplier.Phone" class="control-label add-form-titles">Tedarikçi Telefon Numarası</label>
+                                            <input asp-for="Supplier.Phone" class="form-control" />
+                                            <span asp-validation-for="Supplier.Phone" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Supplier.Email" class="control-label add-form-titles">Tedarikçi E-Mail</label>
+                                            <input asp-for="Supplier.Email" class="form-control" />
+                                            <span asp-validation-for="Supplier.Email" class="text-danger"></span>
+                                        </div>
+
+                                    </div>
+
+
+
                                     
 
                                     <div class="form-group">
@@ -93,3 +116,17 @@
     </div>
 </div>
 
+<script type="text/javascript">
+
+
+    function sec(supplierselect) {
+        if (supplierselect.value == 0) {
+            $("#addNewSupplier").removeClass("d-none");
+        }
+        else {
+            $("#addNewSupplier").addClass("d-none");
+        }
+    }
+
+
+</script>

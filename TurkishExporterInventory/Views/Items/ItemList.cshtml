@@ -12,8 +12,15 @@
 
         <div class="card-body">
             <h4 class="card-title">Tüm Eşyalar</h4>
-
-            <table class="table table-bordered">
+            <div>
+                <input type="radio" id="allItems" name="location" onchange="filter()">
+                <label for="allItems">Hepsi</label>
+                <input type="radio" id="companyItems" name="location" onchange="filter()">
+                <label for="companyItems">Sadece Şirkette</label>
+                <input type="radio" id="userItems" name="location" onchange="filter()">
+                <label for="userItems">Sadece Kullanıcıda</label>
+            </div>
+            <table class="table table-bordered" id="itemListTable">
                 <thead>
                     <tr>
                         <th class="userlist-form-th font-weight-bolder"> Index </th>
@@ -40,8 +47,8 @@
                                 <td> @item.Purpose </td>
                                 <td> @Html.DisplayFor(modelItem => item.ItemOwnersCount) </td>
                                 <td> ₺@Html.DisplayFor(modelItem => item.PriceTL) </td>
-                                <td> @item.BoughtDate.Date.ToString("MM/dd/yyyy")</td>
-                                <td> @Html.DisplayFor(modelItem => item.LastUser) </td>
+                                <td> @item.BuyingDate.Date.ToString("MM/dd/yyyy") </td>
+                                <td> @Html.DisplayFor(modelItem => item.LastUserName) </td>
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Düzenle</a>
                                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Detaylar</a>
@@ -51,15 +58,15 @@
                         }
                         else if (i % 5 == 2)
                         {
-                            <tr class="table-warning" @Html.>
+                            <tr class="table-warning" @Html .>
                                 <td> @i </td>
                                 <td> @Html.DisplayFor(modelItem => item.Name) </td>
                                 <td> @Html.DisplayFor(modelItem => item.BoughtPlace) </td>
                                 <td> @item.Purpose </td>
                                 <td> @Html.DisplayFor(modelItem => item.ItemOwnersCount) </td>
                                 <td> ₺@Html.DisplayFor(modelItem => item.PriceTL) </td>
-                                <td> @item.BoughtDate.Date.ToString("MM/dd/yyyy")</td>
-                                <td> @Html.DisplayFor(modelItem => item.LastUser) </td>
+                                <td> @item.BuyingDate.Date.ToString("MM/dd/yyyy") </td>
+                                <td> @Html.DisplayFor(modelItem => item.LastUserName) </td>
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Düzenle</a>
                                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Detaylar</a>
@@ -76,8 +83,8 @@
                                 <td> @item.Purpose </td>
                                 <td> @Html.DisplayFor(modelItem => item.ItemOwnersCount) </td>
                                 <td> ₺@Html.DisplayFor(modelItem => item.PriceTL) </td>
-                                <td> @item.BoughtDate.Date.ToString("MM/dd/yyyy")</td>
-                                <td> @Html.DisplayFor(modelItem => item.LastUser) </td>
+                                <td> @item.BuyingDate.Date.ToString("MM/dd/yyyy") </td>
+                                <td> @Html.DisplayFor(modelItem => item.LastUserName) </td>
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Düzenle</a>
                                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Detaylar</a>
@@ -94,8 +101,8 @@
                                 <td> @item.Purpose </td>
                                 <td> @Html.DisplayFor(modelItem => item.ItemOwnersCount) </td>
                                 <td> ₺@Html.DisplayFor(modelItem => item.PriceTL) </td>
-                                <td> @item.BoughtDate.Date.ToString("MM/dd/yyyy")</td>
-                                <td> @Html.DisplayFor(modelItem => item.LastUser) </td>
+                                <td> @item.BuyingDate.Date.ToString("MM/dd/yyyy") </td>
+                                <td> @Html.DisplayFor(modelItem => item.LastUserName) </td>
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Düzenle</a>
                                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Detaylar</a>
@@ -112,8 +119,8 @@
                                 <td> @item.Purpose </td>
                                 <td> @Html.DisplayFor(modelItem => item.ItemOwnersCount) </td>
                                 <td> ₺@Html.DisplayFor(modelItem => item.PriceTL) </td>
-                                <td> @item.BoughtDate.Date.ToString("MM/dd/yyyy")</td>
-                                <td> @Html.DisplayFor(modelItem => item.LastUser) </td>
+                                <td> @item.BuyingDate.Date.ToString("MM/dd/yyyy") </td>
+                                <td> @Html.DisplayFor(modelItem => item.LastUserName) </td>
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Düzenle</a>
                                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-dark btn-rounded btn-sm default-buttons">Detaylar</a>
@@ -130,6 +137,40 @@
     </div>
 </div>
 
+<script>
 
+    $(document).ready(function () {
+        $('#itemListTable').dataTable({});
+    });
 
+    function filter() {
+
+        if (document.getElementById('allItems').checked) {
+            
+        }
+        else if (document.getElementById('companyItems').checked) {
+
+        }
+        else {
+
+        }
+        //var input, filter, table, tr, td, i, txtValue;
+        //input = document.getElementById("myInput");
+        //filter = input.value.toUpperCase();
+        //table = document.getElementById("myTable");
+        //tr = table.getElementsByTagName("tr");
+        //for (i = 0; i < tr.length; i++) {
+        //    td = tr[i].getElementsByTagName("td")[0];
+        //    if (td) {
+        //        txtValue = td.textContent || td.innerText;
+        //        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        //            tr[i].style.display = "";
+        //        } else {
+        //            tr[i].style.display = "none";
+        //        }
+        //    }
+        //}
+    }
+
+</script>
 

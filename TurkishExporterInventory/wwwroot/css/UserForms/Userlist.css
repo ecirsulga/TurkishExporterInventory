@@ -16,6 +16,7 @@
 }
 .default-buttons{
     width: 33%;
+    font-size: .57rem !important;
 }
 .item-count-td {
     text-align:center;
@@ -53,3 +54,6 @@
     display: block;
 }
 
+.custom-select {
+    font-size : 1rem;
+}

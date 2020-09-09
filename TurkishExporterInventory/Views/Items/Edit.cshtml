@@ -38,21 +38,24 @@
                 <select asp-for="rlt_Supplier_Id" class="form-control" asp-items="ViewBag.rlt_Supplier_Id"></select>
                 <span asp-validation-for="rlt_Supplier_Id" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="rlt_User_Id" class="control-label">Tahsis Edilecek Kullanıcı</label>
+                <select asp-for="rlt_User_Id" class="form-control" asp-items="ViewBag.rlt_User_Id" onchange="javascript:sec(this)"></select>
+                <span asp-validation-for="rlt_User_Id" class="text-danger"></span>
+            </div>
+
             @{
-                if (Model.LastUser != null && Model.ReturnDate !=DateTime.MinValue)
+                if (Model.LastUserName != null)
                 {
-                    <div class="form-group">
-                        <label asp-for="ReturnDate" class="control-label">@Model.LastUser tarafından geri veriliş tarihi.</label>
-                        <input asp-for="ReturnDate" class="form-control" placeholder="@DateTime.Now" />
+                    <div class="form-group d-none" id="returnDate">
+                        <label asp-for="ReturnDate" class="control-label">@Model.LastUserName tarafından geri veriliş tarihi.</label>
+                        <input asp-for="ReturnDate" class="form-control" />
                         <span asp-validation-for="ReturnDate" class="text-danger"></span>
                     </div>
                 }
             }
-            <div class="form-group">
-                <label asp-for="rlt_User_Id" class="control-label">Tahsis Edilecek Kullanıcı</label>
-                <select asp-for="rlt_User_Id" class="form-control" asp-items="ViewBag.rlt_User_Id"></select>
-                <span asp-validation-for="rlt_User_Id" class="text-danger"></span>
-            </div>
+
+
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -65,3 +68,17 @@
     <a asp-action="ItemList">Back to List</a>
 </div>
 
+<script type="text/javascript">
+
+
+    function sec(userselect) {
+        if (userselect.value != @Model.LastUserId) {
+            $("#returnDate").removeClass("d-none");
+        }
+        else {
+            $("#returnDate").addClass("d-none");
+        }
+    }
+
+
+</script>
